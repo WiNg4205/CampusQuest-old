@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 function Tabs() {
   const [activeTab, setActiveTab] = useState('quests');
 
-  const getTabClassName = (tab) => {
+  const getTabClassName = (tab) => { // change colour when tab is clicked
     return `flex-1 text-center font-bold text-xl ${
       activeTab === tab ? 'text-blue-500' : 'text-gray-800'
     } cursor-pointer hover:${
