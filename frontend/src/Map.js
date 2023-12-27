@@ -11,7 +11,7 @@ function Map() {
     script.onload = () => {
       const map = new window.Mazemap.Map({
         container: 'map',
-        campuses: 121,
+        campuses: 111,
         center: {lng: 151.2300, lat: -33.9172},
         zoom: 16,
         zLevel: 3

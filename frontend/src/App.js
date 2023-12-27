@@ -1,11 +1,18 @@
 import './App.css';
+import React from 'react';
+import SideBar from './SideBar';
 import Map from './Map';
 
 function App() {
   return (
-    <div className="App">
-      <h1>Hello World!</h1>
-      <Map />
+    <div className="flex">
+      <div className="w-1/4 bg-gray-200 px-4">
+        <SideBar />
+      </div>
+
+      <div className="flex-1 p-4 relative h-screen ">
+        <Map />
+      </div>
     </div>
   );
 }
