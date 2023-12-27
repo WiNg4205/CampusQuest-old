@@ -7,7 +7,7 @@ function Tabs() {
     return `flex-1 text-center font-bold text-xl ${
       activeTab === tab ? 'text-blue-500' : 'text-gray-800'
     } cursor-pointer hover:${
-      activeTab !== tab ? 'text-gray-600' : 'text-gray-800'
+      activeTab !== tab ? 'text-gray-600' : 'text-blue-500'
     }`;
   };
 
