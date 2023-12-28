@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 
 function Map() {
 
@@ -9,9 +9,17 @@ function Map() {
     
     document.head.appendChild(script);
 
+    //options for map render
     const lngLat = {lng: 151.2300, lat: -33.9172};
     const campusId = 111;
     const zLevel = 3;
+
+    // options for live location tracking
+    const options = {
+      enableHighAccuracy: true,
+      timeout: 5000,
+      maximumAge: 0,
+    };
 
     script.onload = () => {
       const map = new window.Mazemap.Map({
@@ -22,29 +30,35 @@ function Map() {
         zLevel: zLevel
       });
 
-      // get user's location data
+      // get user's location data (live)
+      // ISSUE: live location only updates when user leaves the web app (i.e. switches tabs/opens another app)
       if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
+        // refer to https://www.educative.io/answers/how-to-use-geolocation-call-in-reactjs 
+        // and https://developer.mozilla.org/en-US/docs/Web/API/Geolocation/watchPosition
+        // for docs on geolocation
+        navigator.geolocation.watchPosition(
           (position) => {
             var locationData = {lng: position.coords.longitude, lat: position.coords.latitude};
-
             // add blue dot to map
             map.on('load', function() {
               window.blueDot = new window.Mazemap.BlueDot({
                 map: map,
               })
-                .setZLevel(zLevel)
-                .setAccuracy(10)
-                .setLngLat(locationData)
-                .setBearingAccuracy(10)
-                .setBearing(0)
-                .showBearingHint()
-                .show();
-            })
+              .setZLevel(zLevel)
+              .setAccuracy(10)
+              .setLngLatAnimated(locationData)
+              .show();
+            });
+
+            if(window.blueDot) {
+              console.log(locationData);
+              window.blueDot.setLngLatAnimated(locationData)
+            }
           },
           (error) => {
             console.error('Error getting user location:', error);
-          }
+          },
+          options
         );
       }
       else {
