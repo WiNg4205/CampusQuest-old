@@ -4,7 +4,7 @@ import Tabs from "./Tabs";
 function SideBar() {
 	return (
     <div className="flex flex-col h-screen">
-      <div className="text-4xl font-bold text-center p-4 w-full font-sans">Campus Quest</div>
+      <div className="text-4xl font-bold text-center p-4 w-full">Campus Quest</div> 
 
       <div className="flex-1 overflow-y-auto">
         <div className="p-4 transition duration-300 hover:bg-blue-200 w-full">
