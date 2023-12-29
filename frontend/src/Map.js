@@ -1,5 +1,23 @@
 import React, { useEffect } from 'react';
 
+function postLocationData(locationData) {
+  fetch("/api", {
+    method: "POST",
+    body: JSON.stringify({
+      data: locationData,
+    }),
+    headers: {
+      "Content-type": "application/json; charset=UTF-8",
+    }
+  }).then(
+      response => response.json()
+  ).then(
+      data => {
+          console.log(data);
+      }
+  );
+}
+
 function Map() {
 
   useEffect(() => {
@@ -30,6 +48,10 @@ function Map() {
         zLevel: zLevel
       });
 
+      const interval = setInterval(() => {
+        console.log('Interval triggered');
+      }, 1000);
+
       // get user's location data (live)
       // ISSUE: live location only updates when user leaves the web app (i.e. switches tabs/opens another app)
       if (navigator.geolocation) {
@@ -51,9 +73,12 @@ function Map() {
             });
 
             if(window.blueDot) {
-              console.log(locationData);
-              window.blueDot.setLngLatAnimated(locationData)
+              window.blueDot.setLngLatAnimated(locationData);
+              
+              // post location data to server
+              postLocationData(locationData);
             }
+
           },
           (error) => {
             console.error('Error getting user location:', error);
@@ -66,6 +91,7 @@ function Map() {
       }
 
       return () => {
+        clearInterval(interval)
         map.destroy();
       };
     };
