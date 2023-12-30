@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Tabs from "./Tabs";
+// import Tabs from "./Tabs";
 
 function SideBar() {
   const [activeTab, setActiveTab] = useState("quests"); // Default active tab is "quests"
