@@ -1,8 +1,5 @@
 import React, { useEffect } from 'react';
 
-
-
-
 var markerData = [
   { 
       lngLat: {lng: 151.225817, lat: -33.9153836},
@@ -45,10 +42,7 @@ var markerData = [
   }
 ];
 
-
 var markers = []; // Declare allMarkers globally
-
-
 
 
 function Map() {
@@ -60,16 +54,17 @@ function Map() {
     
     document.head.appendChild(script);
 
+    const campusId = 111;    
     const lngLat = {lng: 151.2300, lat: -33.9172};
-    const campusId = 111;
+    const zoom = 16;
     const zLevel = 3;
 
     script.onload = () => {
       const map = new window.Mazemap.Map({
-        container: 'map',
+        container: "map",
         campuses: campusId,
         center: lngLat,
-        zoom: 16,
+        zoom: zoom,
         zLevel: zLevel
       });
 
@@ -83,9 +78,10 @@ function Map() {
             markers.push(marker);
         }
       }
+      addMarkers();
 
+      
       map.on('load', function() {
-        addMarkers();
         window.blueDot = new window.Mazemap.BlueDot({
             map: map,
         })
@@ -106,7 +102,7 @@ function Map() {
           marker.getElement().addEventListener('mouseleave', () => {
               resetMarker(marker);
           });
-      });
+        });
       });
       
       return () => {
