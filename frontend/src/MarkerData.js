@@ -37,6 +37,32 @@ var markerData = [
       shape: 'marker',
       zLevel: 1
     }
+  },
+  {
+    lngLat: {lng: 151.2258017, lat: -33.916},
+    options: {
+      imgUrl: 'yallah-eat-logo.png',
+      imgScale: 0.8,
+      color: 'MazePurple',
+      size: 50,
+      innerCircle: false,
+      innerCircleScale: 0.6,
+      shape: 'marker',
+      zLevel: 1
+    }
+  },
+  {
+    lngLat: {lng: 151.2272977, lat: -33.9166969},
+    options: {
+      imgUrl: 'nene-chicken-logo.png',
+      imgScale: 3,
+      color: 'MazePurple',
+      size: 50,
+      innerCircle: false,
+      innerCircleScale: 0.6,
+      shape: 'marker',
+      zLevel: 1
+    }
   }
 ];
 
