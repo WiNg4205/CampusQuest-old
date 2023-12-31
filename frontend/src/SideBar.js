@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { setSidebarUpdateCallback } from "./MapUtil";
 // import Tabs from "./Tabs";
 
 function SideBar() {
@@ -7,6 +8,15 @@ function SideBar() {
   const handleTabClick = (tab) => {
     setActiveTab(tab);
   };
+
+  const [visitedCount, setVisitedCount] = useState(0);
+
+  useEffect(() => {
+    // Set the callback to update the sidebar
+    setSidebarUpdateCallback((numVisited) => {
+      setVisitedCount(numVisited);
+    });
+  }, []);
 
   return (
     <div className="flex flex-col h-screen">
@@ -19,7 +29,7 @@ function SideBar() {
               <div className="text-xl font-semibold">Restaurant Explorer</div>
               <div className="italic">Visit 3 restaurants</div>
               <div className="relative h-10 bg-green-300">
-                <div className="absolute h-full bg-green-500" style={{ width: '50%' }}></div>
+              <div className="absolute h-full bg-green-500" style={{ width: `${Math.min((visitedCount / 3) * 100, 100)}%` }}></div>
               </div>
             </div>
 
@@ -27,7 +37,7 @@ function SideBar() {
               <div className="text-xl font-semibold">Region Explorer</div>
               <div className="italic">Visit 2 regions</div>
               <div className="relative h-10 bg-green-300">
-                <div className="absolute h-full bg-green-500" style={{ width: '30%' }}></div>
+                <div className="absolute h-full bg-green-500" style={{ width: "0%" }}></div>
               </div>
             </div>
 
@@ -35,10 +45,19 @@ function SideBar() {
               <div className="text-xl font-semibold">Caffeine Addict</div>
               <div className="italic">Visit all cafés</div>
               <div className="relative h-10 bg-green-300">
-                <div className="absolute h-full bg-green-500" style={{ width: '70%' }}></div>
+                <div className="absolute h-full bg-green-500" style={{ width: "0%" }}></div>
+              </div>
+            </div>
+
+            <div className="p-4 transition duration-300 hover:bg-blue-200 w-full">
+              <div className="text-xl font-semibold">Restaurant Explorer II</div>
+              <div className="italic">Visit 5 restaurants</div>
+              <div className="relative h-10 bg-green-300">
+              <div className="absolute h-full bg-green-500" style={{ width: `${Math.min((visitedCount / 5) * 100, 100)}%` }}></div>
               </div>
             </div>
           </div>
+          
         )}
 
         {activeTab === "rewards" && (
