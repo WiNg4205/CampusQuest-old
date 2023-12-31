@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import markerData from './MarkerData';
 import { inflateMarker, resetMarker, handleKeyDown } from './MapUtil';
 
@@ -6,68 +6,70 @@ var markers = []; // Declare markers globally
 
 function Map() {
 
-  useEffect(() => {
-    const script = document.createElement('script');
-    script.src = 'https://api.mazemap.com/js/v2.0.114/mazemap.min.js';
-    script.async = true;
+  const script = document.createElement('script');
+  script.src = 'https://api.mazemap.com/js/v2.0.114/mazemap.min.js';
+  script.async = true;
+  
+  document.head.appendChild(script);
+
+  const campusId = 111;    
+  const lngLat = {lng: 151.2300, lat: -33.9172};
+  const zoom = 16;
+  const zLevel = 3;
+
+  script.onload = () => {
+    const map = new window.Mazemap.Map({
+      container: "map",
+      campuses: campusId,
+      center: lngLat,
+      zoom: zoom,
+      zLevel: zLevel
+    });
+
+    function addMarkers() {
+      let i, lngLat, options, marker, markerObject;
     
-    document.head.appendChild(script);
-
-    const campusId = 111;    
-    const lngLat = {lng: 151.2300, lat: -33.9172};
-    const zoom = 16;
-    const zLevel = 3;
-
-    script.onload = () => {
-      const map = new window.Mazemap.Map({
-        container: "map",
-        campuses: campusId,
-        center: lngLat,
-        zoom: zoom,
-        zLevel: zLevel
-      });
-
-      function addMarkers() {
-        var i, lngLat, options, marker;
-      
-        for (i = 0; i < markerData.length; i++) {
-            lngLat = markerData[i].lngLat;
-            options = markerData[i].options;
-            marker = new window.Mazemap.MazeMarker(options).setLngLat(lngLat).addTo(map);
-            markers.push(marker);
+      for (i = 0; i < markerData.length; i++) {
+        lngLat = markerData[i].lngLat;
+        options = markerData[i].options;
+        markerObject = new window.Mazemap.MazeMarker(options).setLngLat(lngLat).addTo(map);
+        marker = {
+          "marker" : markerObject,
+          "visited" : false
         }
+        markers.push(marker);
       }
-      addMarkers();
-      
-      map.on('load', function() {
-        window.blueDot = new window.Mazemap.BlueDot({
-            map: map,
-        })
-        .setZLevel(3)
-        .setLngLat( {lng: 151.2300, lat: -33.9172} )
-        .show();
+    }
+    addMarkers();
     
-    
-        map.on('click', function (ev) {
-            window.blueDot.setLngLat(ev.lngLat, {animate: true});
-        });
+    map.on('load', function() {
+      window.blueDot = new window.Mazemap.BlueDot({
+        map: map,
+      })
+      .setZLevel(3)
+      .setLngLat( {lng: 151.2300, lat: -33.9172} )
+      .show();
 
-        markers.forEach((marker) => {
-          marker.getElement().addEventListener('mouseenter', () => {
-              inflateMarker(marker);
-          });
-      
-          marker.getElement().addEventListener('mouseleave', () => {
-              resetMarker(marker);
-          });
+      map.on('click', function (ev) {
+          window.blueDot.setLngLat(ev.lngLat, {animate: true});
+      });
+
+      markers.forEach((marker) => {
+        let markerObject = marker["marker"];
+        markerObject.getElement().addEventListener('mouseenter', () => {
+          inflateMarker(markerObject);
+        });
+    
+        markerObject.getElement().addEventListener('mouseleave', () => {
+          resetMarker(markerObject);
         });
       });
-      
-      return () => {
-        map.destroy();
-      };
+    });
+    
+    return () => {
+      map.destroy();
     };
-  }, []);
+  };
 
   return <div id="map" className="mazemap"></div>;
 };

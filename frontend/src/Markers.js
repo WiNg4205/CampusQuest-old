@@ -20,13 +20,13 @@ function deg2rad(deg) {
   return deg * (Math.PI / 180);
 }
 
-// inflate marker if blueDot nearby
-function updateMarkerSize(markers) {
+function updateMarker(markers) {
+  let markerObject;
   const blueDotLngLat = window.blueDot.lngLat;
   const radiusThreshold = 0.02; // radius threshold in km
-
   markers.forEach((marker) => {
-    const markerLngLat = marker.getLngLat();
+    markerObject = marker["marker"];
+    const markerLngLat = markerObject.getLngLat();
     const distance = haversineDistance(
       blueDotLngLat.lat,
       blueDotLngLat.lng,
@@ -34,11 +34,19 @@ function updateMarkerSize(markers) {
       markerLngLat.lng
     );
 
-  // Inflate marker when nearby
-  const newSize = distance <= radiusThreshold ? marker.options.size * 1.2 : marker.options.size;
-    console.log(marker.options.imgUrl, newSize, distance, blueDotLngLat);
-    marker.setSize(newSize);
+    // Inflate marker when nearby
+    const newSize = distance <= radiusThreshold ? markerObject.options.size * 1.2 : markerObject.options.size;
+    markerObject.setSize(newSize);
+    if (distance <= radiusThreshold) marker["visited"] = true;
   });
 }
 
-export default updateMarkerSize;
+function numVisited(markers) {
+  let numVisited = 0;
+  markers.forEach((marker) => {
+    if (marker["visited"] === true) numVisited++;
+  });
+  return numVisited;
+}
+
+export { updateMarker, numVisited };
