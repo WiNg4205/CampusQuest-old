@@ -93,7 +93,7 @@ function SideBar() {
                 </div>
                 <div className="flex items-center justify-between">
                     <div className="italic">Future addition</div>
-                    <div className="bg-gray-600 mt-2 text-white rounded-full px-2 py-2">50 pt</div>
+                    <div className="bg-gray-600 mt-2 text-white rounded-full px-2 py-2">∞ pt</div>
                 </div>
                 <div className="relative h-10 mt-2 bg-gray-300">
                     <div className="absolute h-full bg-gray-500" style={{ width: '0%' }}></div>
