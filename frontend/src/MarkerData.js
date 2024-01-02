@@ -37,6 +37,45 @@ var markerData = [
       shape: 'marker',
       zLevel: 1
     }
+  },
+  {
+    lngLat: {lng: 151.2266329, lat: -33.9179097},
+    options: {
+      imgUrl: 'home-ground.png',
+      imgScale: 2,
+      color: 'MazeGreen',
+      size: 50,
+      innerCircle: true,
+      innerCircleScale: 0.6,
+      shape: 'marker',
+      zLevel: 1
+    }
+  },
+  {
+    lngLat: {lng: 151.2319776, lat: -33.9172259},
+    options: {
+      imgUrl: 'lasak-delight.png',
+      imgScale: 2,
+      color: 'MazeOrange',
+      size: 50,
+      innerCircle: true,
+      innerCircleScale: 0.6,
+      shape: 'marker',
+      zLevel: 1
+    }
+  },
+  {
+    lngLat: {lng: 151.2272977, lat: -33.9166969},
+    options: {
+      imgUrl: 'nene-chicken.png',
+      imgScale: 2,
+      color: 'MazeYellow',
+      size: 50,
+      innerCircle: true,
+      innerCircleScale: 0.6,
+      shape: 'marker',
+      zLevel: 1
+    }
   }
 ];
 
