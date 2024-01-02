@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 
 function postLocationData(locationData) {
+  console.log("interval");
   fetch("/api", {
     method: "POST",
     body: JSON.stringify({
@@ -54,7 +55,6 @@ function updateLocation(navigator, window) {
 }
 
 function Map() {
-
   useEffect(() => {
     const script = document.createElement('script');
     script.src = 'https://api.mazemap.com/js/v2.0.114/mazemap.min.js';
@@ -85,6 +85,7 @@ function Map() {
         // and https://developer.mozilla.org/en-US/docs/Web/API/Geolocation/watchPosition
         // for docs on geolocation
         
+        // TODO: blue dot may not be updating/not cleared upon update
         // intialize blue dot
         navigator.geolocation.getCurrentPosition(
           function(position) {
