@@ -39,26 +39,13 @@ var markerData = [
     }
   },
   {
-    lngLat: {lng: 151.2266329, lat: -33.9179097},
+    lngLat: {lng: 151.2258017, lat: -33.916},
     options: {
-      imgUrl: 'home-ground.png',
-      imgScale: 2,
-      color: 'MazeGreen',
+      imgUrl: 'yallah-eat-logo.png',
+      imgScale: 0.8,
+      color: 'MazePurple',
       size: 50,
-      innerCircle: true,
-      innerCircleScale: 0.6,
-      shape: 'marker',
-      zLevel: 1
-    }
-  },
-  {
-    lngLat: {lng: 151.2319776, lat: -33.9172259},
-    options: {
-      imgUrl: 'lasak-delight.png',
-      imgScale: 2,
-      color: 'MazeOrange',
-      size: 50,
-      innerCircle: true,
+      innerCircle: false,
       innerCircleScale: 0.6,
       shape: 'marker',
       zLevel: 1
@@ -67,11 +54,11 @@ var markerData = [
   {
     lngLat: {lng: 151.2272977, lat: -33.9166969},
     options: {
-      imgUrl: 'nene-chicken.png',
-      imgScale: 2,
-      color: 'MazeYellow',
+      imgUrl: 'nene-chicken-logo.png',
+      imgScale: 3,
+      color: 'MazePurple',
       size: 50,
-      innerCircle: true,
+      innerCircle: false,
       innerCircleScale: 0.6,
       shape: 'marker',
       zLevel: 1
