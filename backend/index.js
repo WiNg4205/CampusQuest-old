@@ -27,6 +27,13 @@ app.use(session({
     store: store,
 }));
 
+const isAuth = (req, res, next) => {
+    if (req.session.isAuth) {
+        next();
+    } else {
+        res.redirect('/login');
+    }
+}
 
 app.get("/", (req, res) => {
     req.session.isAuth = true;
@@ -53,6 +60,7 @@ app.post("/login", async (req, res) => {
         return(res.redirect("/login"));
     }
 
+    req.session.isAuth = true;
     res.redirect("/dashboard");
 })
 
