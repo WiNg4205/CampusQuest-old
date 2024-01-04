@@ -42,9 +42,17 @@ function updateMarker(markers) {
 }
 
 function numVisited(markers) {
-  let numVisited = 0;
+  let numVisited = {
+    "restaurants": 0,
+    "cafes": 0
+  };
+
   markers.forEach((marker) => {
-    if (marker["visited"] === true) numVisited++;
+    if (marker["visited"] === true) {
+    let color = marker["marker"]._color
+      if (color === 'MazeGreen') numVisited["restaurants"]++;
+      else if (color === 'MazePurple') numVisited["cafes"]++;
+    }
   });
   return numVisited;
 }
