@@ -1,10 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import markerData from './MarkerData';
 import { inflateMarker, resetMarker, handleKeyDown } from './MapUtil';
 import { setModeUpdateCallback } from './LocationButton';
 
 var markers = []; // Declare markers globally
-var gameLocation = null;
 
 // function postLocationData(locationData) {
 //   console.log("interval");
@@ -75,17 +74,20 @@ function addMarkers(map) {
 }
 
 function Map() {
+  const intervalRef = useRef(null);
+  const gameLocationRef = useRef(null);
+
   useEffect(() => {
     setModeUpdateCallback((locationModeActive) => {
       if (locationModeActive) {
-        gameLocation = { ...window.blueDot.lngLat }; // shallow copy to save game location
+        gameLocationRef.current = { ...window.blueDot.lngLat }; // Shallow copy to save game location
         updateLocation(navigator, window);
-        interval = setInterval(() => {
+        intervalRef.current = setInterval(() => {
           updateLocation(navigator, window);
         }, intervalTime);
       } else {
-        clearInterval(interval);
-        window.blueDot.setLngLat(gameLocation);
+        clearInterval(intervalRef.current);
+        window.blueDot.setLngLat(gameLocationRef.current);
       }
     });
   }, []);
