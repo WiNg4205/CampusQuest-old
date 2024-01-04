@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { setSidebarUpdateCallback } from "./MapUtil";
+import LocationButton from "./LocationButton";
 // import Tabs from "./Tabs";
 
 function SideBar() {
@@ -83,7 +84,7 @@ function SideBar() {
                     <div className="bg-green-500 text-white rounded-full px-2 py-1">Completed</div>
                 </div>
                 <div className="flex items-center justify-between">
-                    <div className="italic">Explore activites on campus</div>
+                    <div className="italic">Explore activities on campus</div>
                     <div className="bg-green-900 mt-2 text-white rounded-full px-2 py-2">3 pt</div>
                 </div>
                 <div className="relative h-10 mt-2 bg-green-300">
@@ -140,6 +141,7 @@ function SideBar() {
         >
           Rewards
         </div>
+        <LocationButton />
       </div>
     </div>
   );

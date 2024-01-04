@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import markerData from './MarkerData';
 import { inflateMarker, resetMarker, handleKeyDown } from './MapUtil';
+import { setModeUpdateCallback } from './LocationButton';
 
 var markers = []; // Declare markers globally
+var gameLocation = null;
 
 function postLocationData(locationData) {
   console.log("interval");
@@ -28,7 +30,7 @@ function intializeBlueDot(window, map, locationData) {
     window.blueDot = new window.Mazemap.BlueDot({
       map: map,
     })
-    .setZLevel(3)
+    .setZLevel(1)
     .setAccuracy(10)
     .setLngLatAnimated(locationData)
     .show();
@@ -48,12 +50,13 @@ function updateLocation(navigator, window) {
       }
 
       // send data to server
-      postLocationData(locationData);
+      // postLocationData(locationData); // COMMENT OUT FOR DEPLOYING
     },
     function(error) {
       console.error('Error getting user location:', error);
-    }
+    },
   )
+  
 }
 
 function addMarkers(map) {
@@ -72,6 +75,21 @@ function addMarkers(map) {
 }
 
 function Map() {
+  useEffect(() => {
+    setModeUpdateCallback((locationModeActive) => {
+      if (locationModeActive) {
+        gameLocation = { ...window.blueDot.lngLat }; // shallow copy to save game location
+        updateLocation(navigator, window);
+        interval = setInterval(() => {
+          updateLocation(navigator, window);
+        }, intervalTime);
+      } else {
+        clearInterval(interval);
+        window.blueDot.setLngLat(gameLocation);
+      }
+    });
+  }, []);
+
   const script = document.createElement('script');
   script.src = 'https://api.mazemap.com/js/v2.0.114/mazemap.min.js';
   script.async = true;
@@ -86,7 +104,7 @@ function Map() {
   const campusId = 111;    
   const lngLat = {lng: 151.2300, lat: -33.9172};
   const zoom = 16;
-  const zLevel = 3;
+  const zLevel = 'G';
 
   script.onload = () => {
     const map = new window.Mazemap.Map({
@@ -98,40 +116,15 @@ function Map() {
     });
 
     addMarkers(map);
+    intializeBlueDot(window, map, lngLat);
 
-    // get user's location data (live)
-    if (navigator.geolocation) {
-      // refer to https://www.educative.io/answers/how-to-use-geolocation-call-in-reactjs 
-      // and https://developer.mozilla.org/en-US/docs/Web/API/Geolocation/watchPosition
-      // for docs on geolocation
-      
-      // TODO: blue dot may not be updating/not cleared upon update
-      // intialize blue dot
-      navigator.geolocation.getCurrentPosition(
-        function(position) {
-          var locationData = {lng: position.coords.longitude, lat: position.coords.latitude};
-          intializeBlueDot(window, map, locationData);
-        },
-        function(error) {
-          console.error('Error getting user location:', error);
-        }
-      )
-
-      interval = setInterval(() => {
-        updateLocation(navigator, window);
-      }, intervalTime);
-
-    }
-    else {
-      console.error('Geolocation is not supported by this browser.');
-    }
     
     map.on('load', function() {
       map.on('click', function (ev) {
           window.blueDot.setLngLat(ev.lngLat, {animate: true});
       });
 
-      markers.forEach((marker) => {
+      markers.forEach((marker) => { // icons inflate on mouse hover
         let markerObject = marker["marker"];
         markerObject.getElement().addEventListener('mouseenter', () => {
           inflateMarker(markerObject);
