@@ -55,7 +55,22 @@ function updateLocation(navigator, window) {
       console.error('Error getting user location:', error);
     },
   )
+}
+
+function addPopUp(marker) {
+  var imgName = marker.options.imgUrl;
+  var popup = new window.Mazemap.Popup({closeOnClick: true, offset: [0, -27]})
+
+
+  // change this to switch statement once there are more logos
+  if (imgName === "sharetea-logo.png") {
+    popup.setHTML('<img src="sharetea_front_100_v1.png" alt="Share Tea Logo" width="500" height="600"><h3>Share Tea</h3>');
+  }
+  else if (imgName === "yallah-eat-logo.png") {
+    popup.setHTML('<img src="yallah_eat_300_v1.png" alt="Yallah Eat Logo" width="500" height="600"><h3>Yallah Eat</h3>');
+  }
   
+  marker.setPopup(popup);  
 }
 
 function addMarkers(map) {
@@ -65,6 +80,9 @@ function addMarkers(map) {
     lngLat = markerData[i].lngLat;
     options = markerData[i].options;
     markerObject = new window.Mazemap.MazeMarker(options).setLngLat(lngLat).addTo(map);
+
+    addPopUp(markerObject);
+
     marker = {
       "marker" : markerObject,
       "visited" : false
