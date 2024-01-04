@@ -17,7 +17,6 @@ var markerData = [
       imgScale: 2,
       color: 'MazePurple',
       size: 50,
-      innerCircle: false,
       shape: 'marker',
       zLevel: 1
     }
@@ -29,7 +28,6 @@ var markerData = [
       imgScale: 2,
       color: 'MazeGreen',
       size: 50,
-      innerCircle: false,
       shape: 'marker',
       zLevel: 1
     }
@@ -41,7 +39,6 @@ var markerData = [
       imgScale: 0.8,
       color: 'MazeGreen',
       size: 50,
-      innerCircle: false,
       shape: 'marker',
       zLevel: 1
     }
@@ -53,7 +50,6 @@ var markerData = [
       imgScale: 3,
       color: 'MazeGreen',
       size: 50,
-      innerCircle: false,
       shape: 'marker',
       zLevel: 1
     }
@@ -62,10 +58,9 @@ var markerData = [
     lngLat: {lng: 151.230234, lat: -33.916928},
     options: {
       imgUrl: 'plume-cafe-logo.png',
-      imgScale: 2,
+      imgScale: 1.2,
       color: 'MazePurple',
       size: 50,
-      innerCircle: false,
       shape: 'marker',
       zLevel: 1
     }
@@ -77,7 +72,17 @@ var markerData = [
       imgScale: 3,
       color: 'MazePurple',
       size: 50,
-      innerCircle: false,
+      shape: 'marker',
+      zLevel: 1
+    }
+  },
+  {
+    lngLat: {lng: 151.227803, lat: -33.915670},
+    options: {
+      imgUrl: 'sharetea-logo.png',
+      imgScale: 2,
+      color: 'MazeGreen',
+      size: 50,
       shape: 'marker',
       zLevel: 1
     }
