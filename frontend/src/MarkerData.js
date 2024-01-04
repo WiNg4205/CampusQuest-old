@@ -1,3 +1,4 @@
+// Coordinates for all markers (Cafes & Restaurants)
 // Total: 31 markers
 
 var markerData = [
@@ -346,32 +347,6 @@ var markerData = [
       imgScale: 1,
       color: 'MazeGreen',
       size: 50,
-      shape: 'marker',
-      zLevel: 1
-    }
-  },
-  {
-    lngLat: {lng: 151.2288569, lat: -33.9183132},
-    options: {
-      imgUrl: 'plume-cafe-logo.png',
-      imgScale: 2,
-      color: 'MazePurple',
-      size: 50,
-      innerCircle: false,
-      innerCircleScale: 0.6,
-      shape: 'marker',
-      zLevel: 1
-    }
-  },
-  {
-    lngLat: {lng: 151.23, lat: -33.9183132},
-    options: {
-      imgUrl: 'xs-espresso-logo.png',
-      imgScale: 3,
-      color: 'MazePurple',
-      size: 50,
-      innerCircle: false,
-      innerCircleScale: 0.6,
       shape: 'marker',
       zLevel: 1
     }
