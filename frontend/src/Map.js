@@ -6,24 +6,24 @@ import { setModeUpdateCallback } from './LocationButton';
 var markers = []; // Declare markers globally
 var gameLocation = null;
 
-function postLocationData(locationData) {
-  console.log("interval");
-  fetch("/api", {
-    method: "POST",
-    body: JSON.stringify({
-      data: locationData,
-    }),
-    headers: {
-      "Content-type": "application/json; charset=UTF-8",
-    }
-  }).then(
-      response => response.json()
-  ).then(
-      data => {
-          console.log(data);
-      }
-  );
-}
+// function postLocationData(locationData) {
+//   console.log("interval");
+//   fetch("/api", {
+//     method: "POST",
+//     body: JSON.stringify({
+//       data: locationData,
+//     }),
+//     headers: {
+//       "Content-type": "application/json; charset=UTF-8",
+//     }
+//   }).then(
+//       response => response.json()
+//   ).then(
+//       data => {
+//           console.log(data);
+//       }
+//   );
+// }
 
 function intializeBlueDot(window, map, locationData) {
   map.on('load', function() {
