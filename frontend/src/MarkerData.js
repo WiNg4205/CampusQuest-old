@@ -9,7 +9,7 @@ var markerData = [
       innerCircleColor: 'white',
       innerCircleScale: 0.7,
       shape: 'marker',
-      zLevel: 1
+      zLevel: 0
     }
   },
   {
@@ -22,7 +22,7 @@ var markerData = [
       innerCircle: false,
       innerCircleScale: 0.6,
       shape: 'marker',
-      zLevel: 1
+      zLevel: 0
     }
   },
   {
@@ -35,7 +35,7 @@ var markerData = [
       innerCircle: false,
       innerCircleScale: 0.6,
       shape: 'marker',
-      zLevel: 1
+      zLevel: 0
     }
   },
   {
@@ -48,7 +48,7 @@ var markerData = [
       innerCircle: false,
       innerCircleScale: 0.6,
       shape: 'marker',
-      zLevel: 1
+      zLevel: 0
     }
   },
   {
@@ -61,7 +61,7 @@ var markerData = [
       innerCircle: false,
       innerCircleScale: 0.6,
       shape: 'marker',
-      zLevel: 1
+      zLevel: 0
     }
   }
 ];

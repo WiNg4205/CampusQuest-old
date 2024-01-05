@@ -15,7 +15,7 @@ function Map() {
   const campusId = 111;    
   const lngLat = {lng: 151.2300, lat: -33.9172};
   const zoom = 16;
-  const zLevel = 3;
+  const zLevel = 0;
 
   script.onload = () => {
     const map = new window.Mazemap.Map({

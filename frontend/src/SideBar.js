@@ -20,13 +20,13 @@ function SideBar() {
 
   return (
     <div className="flex flex-col h-screen">
-      <div className="text-4xl font-bold text-center p-4 w-full">Campus Quest</div>
+      <div className="text-4xl font-pixel font-bold text-center p-4 w-full">Campus Quest</div>
 
       <div className="flex-1 overflow-y-auto">
         {activeTab === "quests" && (
           <div className="flex-1 overflow-y-auto">
             <div className="p-4 transition duration-300 hover:bg-blue-200 w-full">
-              <div className="text-xl font-semibold">Restaurant Explorer</div>
+              <div className="text-xl font-pixel">Restaurant Explorer</div>
               <div className="italic">Visit 3 restaurants</div>
               <div className="relative h-10 bg-green-300">
               <div className="absolute h-full bg-green-500" style={{ width: `${Math.min((visitedCount / 3) * 100, 100)}%` }}></div>
@@ -34,7 +34,7 @@ function SideBar() {
             </div>
 
             <div className="p-4 transition duration-300 hover:bg-blue-200">
-              <div className="text-xl font-semibold">Region Explorer</div>
+              <div className="text-xl font-pixel">Region Explorer</div>
               <div className="italic">Visit 2 regions</div>
               <div className="relative h-10 bg-green-300">
                 <div className="absolute h-full bg-green-500" style={{ width: "0%" }}></div>
@@ -42,7 +42,7 @@ function SideBar() {
             </div>
 
             <div className="p-4 transition duration-300 hover:bg-blue-200">
-              <div className="text-xl font-semibold">Caffeine Addict</div>
+              <div className="text-xl font-pixel">Caffeine Addict</div>
               <div className="italic">Visit all cafés</div>
               <div className="relative h-10 bg-green-300">
                 <div className="absolute h-full bg-green-500" style={{ width: "0%" }}></div>
@@ -50,7 +50,7 @@ function SideBar() {
             </div>
 
             <div className="p-4 transition duration-300 hover:bg-blue-200 w-full">
-              <div className="text-xl font-semibold">Restaurant Explorer II</div>
+              <div className="text-xl font-pixel">Restaurant Explorer II</div>
               <div className="italic">Visit 5 restaurants</div>
               <div className="relative h-10 bg-green-300">
               <div className="absolute h-full bg-green-500" style={{ width: `${Math.min((visitedCount / 5) * 100, 100)}%` }}></div>
@@ -65,7 +65,7 @@ function SideBar() {
             <div className="flex-1 overflow-y-auto">
                 <div className="p-4 transition duration-300 hover:bg-blue-200 w-full">
                 <div className="flex items-center justify-between">
-                    <div className="text-xl font-semibold">Region Explorer Reward</div>
+                    <div className="text-xl font-pixel">Region Explorer Reward</div>
                     <div className="bg-green-500 text-white rounded-full px-2 py-1">Completed</div>
                 </div>
                 <div className="flex items-center justify-between">
@@ -79,7 +79,7 @@ function SideBar() {
 
                 <div className="p-4 transition duration-300 hover:bg-blue-200 w-full">
                 <div className="flex items-center justify-between">
-                    <div className="text-xl font-semibold">Find Your Passion</div>
+                    <div className="text-xl font-pixel">Find Your Passion</div>
                     <div className="bg-green-500 text-white rounded-full px-2 py-1">Completed</div>
                 </div>
                 <div className="flex items-center justify-between">
@@ -93,7 +93,7 @@ function SideBar() {
         
                 <div className="p-4 transition duration-300 hover:bg-blue-200 w-full">
                 <div className="flex items-center justify-between">
-                    <div className="text-xl font-semibold">Locate all restaurants</div>
+                    <div className="text-xl font-pixel">Locate all restaurants</div>
                     <div className="bg-green-300 text-white rounded-full px-2 py-1">In Progress</div>
                 </div>
                 <div className="flex items-center justify-between">
@@ -107,7 +107,7 @@ function SideBar() {
         
                 <div className="p-4 transition duration-300 hover:bg-blue-200 w-full">
                 <div className="flex items-center justify-between">
-                    <div className="text-xl font-semibold">Defeat Boris (Demon Lord)</div>
+                    <div className="text-xl font-pixel">Defeat Boris (Demon Lord)</div>
                     <div className="bg-gray-400 text-white rounded-full px-2 py-1">Locked</div>
                 </div>
                 <div className="flex items-center justify-between">
