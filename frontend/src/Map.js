@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
-import markerData from './MarkerData';
+import markerData from './markers/MarkerData';
 import { inflateMarker, resetMarker, handleKeyDown } from './MapUtil';
-import { setModeUpdateCallback } from './LocationButton';
+import { setModeUpdateCallback } from './sidebar/LocationButton';
 
 var markers = []; // Declare markers globally
 

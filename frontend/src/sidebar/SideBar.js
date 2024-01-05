@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { setSidebarUpdateCallback } from "./MapUtil";
+import { setSidebarUpdateCallback } from "../MapUtil";
 import LocationButton from "./LocationButton";
 // import Tabs from "./Tabs";
 

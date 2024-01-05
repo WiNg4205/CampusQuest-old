@@ -1,4 +1,4 @@
-import { numVisited, updateMarker } from "./Markers";
+import { numVisited, updateMarker } from "./markers/Markers";
 
 let sidebarUpdateCallback = null; // Callback function to update the sidebar
 
