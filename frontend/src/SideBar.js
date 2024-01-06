@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { setSidebarUpdateCallback } from "./MapUtil";
-import LocationButton from "./LocationButton";
+import LocationButton from "./sidebar/LocationButton";
 // import Tabs from "./Tabs";
 
 function SideBar() {
@@ -16,7 +16,6 @@ function SideBar() {
     // Set the callback to update the sidebar
     setSidebarUpdateCallback((numVisited) => {
       setVisitedCount(numVisited);
-      console.log(numVisited);
     });
   }, []);
 

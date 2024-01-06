@@ -1,7 +1,9 @@
 import React, { useEffect, useRef } from 'react';
-import markerData from './MarkerData';
+import markerData from './markers/MarkerData';
+import { addPopUp } from './markers/PopUp';
 import { inflateMarker, resetMarker, handleKeyDown } from './MapUtil';
-import { setModeUpdateCallback } from './LocationButton';
+import { setModeUpdateCallback } from './sidebar/LocationButton';
+
 
 var markers = []; // Declare markers globally
 
@@ -57,22 +59,6 @@ function updateLocation(navigator, window) {
   )
 }
 
-function addPopUp(marker) {
-  var imgName = marker.options.imgUrl;
-  var popup = new window.Mazemap.Popup({closeOnClick: true, offset: [0, -27]})
-
-
-  // change this to switch statement once there are more logos
-  if (imgName === "sharetea-logo.png") {
-    popup.setHTML('<img src="sharetea_front_100_v1.png" alt="Share Tea Logo" width="500" height="600"><h3>Share Tea</h3>');
-  }
-  else if (imgName === "yallah-eat-logo.png") {
-    popup.setHTML('<img src="yallah_eat_300_v1.png" alt="Yallah Eat Logo" width="500" height="600"><h3>Yallah Eat</h3>');
-  }
-  
-  marker.setPopup(popup);  
-}
-
 function addMarkers(map) {
   let i, lngLat, options, marker, markerObject;
 
@@ -81,13 +67,16 @@ function addMarkers(map) {
     options = markerData[i].options;
     markerObject = new window.Mazemap.MazeMarker(options).setLngLat(lngLat).addTo(map);
 
-    addPopUp(markerObject);
-
     marker = {
       "marker" : markerObject,
+      "name" : markerData[i].name,
+      "description" : markerData[i].description,
+      "imgUrl" : markerData[i].imgUrl,
       "visited" : false
     }
+
     markers.push(marker);
+    addPopUp(marker);
   }
 }
 
@@ -140,10 +129,6 @@ function Map() {
 
     
     map.on('load', function() {
-      map.on('click', function (ev) {
-          window.blueDot.setLngLat(ev.lngLat, {animate: true});
-      });
-
       markers.forEach((marker) => { // icons inflate on mouse hover
         let markerObject = marker["marker"];
         markerObject.getElement().addEventListener('mouseenter', () => {
