@@ -6,10 +6,13 @@ function explorerPoints(visitedCount) {
     let points = 0;
     if (visitedCount["restaurants"] >= 3) points += 10
     if (visitedCount["restaurants"] >= 10) points += 50
-    if (visitedCount["restaurants"] >= 21) points += 200
+    if (visitedCount["restaurants"] === 21) points += 200
 
     if (visitedCount["cafes"] >= 3) points += 20
-    if (visitedCount["cafes"] >= 10) points += 100
+    if (visitedCount["cafes"] === 10) points += 100
+
+    if (visitedCount["regions"] >= 2) points += 20
+    if (visitedCount["regions"] === 7) points += 100
 
     return points;
 }

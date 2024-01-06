@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { setSidebarUpdateCallback } from "./MapUtil";
 import LocationButton from "./sidebar/LocationButton";
+import { setSidebarUpdateCallback } from "./MapUtil";
+import { totalPoints } from "./sidebar/Points"
+import QuestList from "./sidebar/QuestList";
 // import Tabs from "./Tabs";
 
 function SideBar() {
@@ -10,7 +12,11 @@ function SideBar() {
     setActiveTab(tab);
   };
 
-  const [visitedCount, setVisitedCount] = useState(0);
+  const [visitedCount, setVisitedCount] = useState({
+    "restaurants": 0,
+    "cafes": 0,
+    "regions": 0
+  });
 
   useEffect(() => {
     // Set the callback to update the sidebar
@@ -21,62 +27,33 @@ function SideBar() {
 
   return (
     <div className="flex flex-col h-screen">
-      <div className="text-4xl font-bold text-center p-4 w-full">Campus Quest</div>
+      <div className="flex items-center justify-between">
+        <div className="text-4xl font-bold text-center p-4">Campus Quest</div>
+        <div className="text-xl font-semibold text-right">{totalPoints(visitedCount)} pts</div>
+      </div>
 
       <div className="flex-1 overflow-y-auto">
         {activeTab === "quests" && (
-          <div className="flex-1 overflow-y-auto">
-            <div className="p-4 transition duration-300 hover:bg-blue-200 w-full">
-              <div className="text-xl font-semibold">Restaurant Explorer</div>
-              <div className="italic">Visit 3 restaurants</div>
-              <div className="relative h-10 bg-green-300">
-              <div className="absolute h-full bg-green-500" style={{ width: `${Math.min((visitedCount["restaurants"] / 3) * 100, 100)}%` }}></div>
-              </div>
-            </div>
-
-            <div className="p-4 transition duration-300 hover:bg-blue-200 w-full">
-              <div className="text-xl font-semibold">Restaurant Explorer II</div>
-              <div className="italic">Visit 5 restaurants</div>
-              <div className="relative h-10 bg-green-300">
-              <div className="absolute h-full bg-green-500" style={{ width: `${Math.min((visitedCount["restaurants"] / 5) * 100, 100)}%` }}></div>
-              </div>
-            </div>
-
-            <div className="p-4 transition duration-300 hover:bg-blue-200">
-              <div className="text-xl font-semibold">Region Explorer</div>
-              <div className="italic">Visit 2 regions</div>
-              <div className="relative h-10 bg-green-300">
-                <div className="absolute h-full bg-green-500" style={{ width: "0%" }}></div>
-              </div>
-            </div>
-
-            <div className="p-4 transition duration-300 hover:bg-blue-200">
-              <div className="text-xl font-semibold">Caffeine Addict</div>
-              <div className="italic">Visit 3 cafés</div>
-              <div className="relative h-10 bg-green-300">
-                <div className="absolute h-full bg-green-500" style={{ width: `${Math.min((visitedCount["cafes"] / 3) * 100, 100)}%` }}></div>
-              </div>
-            </div>
-          </div>
+          <QuestList visitedCount={visitedCount}/>
           
         )}
 
         {activeTab === "rewards" && (
           <div className="p-4">
             <div className="flex-1 overflow-y-auto">
-                <div className="p-4 transition duration-300 hover:bg-blue-200 w-full">
+              <div className="p-4 transition duration-300 hover:bg-blue-200 w-full">
                 <div className="flex items-center justify-between">
-                    <div className="text-xl font-semibold">Region Explorer Reward</div>
-                    <div className="bg-green-500 text-white rounded-full px-2 py-1">Completed</div>
+                  <div className="text-xl font-semibold">Region Explorer Reward</div>
+                  <div className="bg-green-500 text-white rounded-full px-2 py-1">Completed</div>
                 </div>
                 <div className="flex items-center justify-between">
-                    <div className="italic">Master the campus</div>
-                    <div className="bg-green-900 mt-2 text-white rounded-full px-2 py-2">7 pt</div>
+                  <div className="italic">Master the campus</div>
+                  <div className="bg-green-900 mt-2 text-white rounded-full px-2 py-2">7 pt</div>
                 </div>
                 <div className="relative h-10 mt-2 bg-green-300">
-                    <div className="absolute h-full bg-green-500" style={{ width: '100%' }}></div>
+                  <div className="absolute h-full bg-green-500" style={{ width: '100%' }}></div>
                 </div>
-                </div>
+              </div>
 
                 <div className="p-4 transition duration-300 hover:bg-blue-200 w-full">
                 <div className="flex items-center justify-between">
