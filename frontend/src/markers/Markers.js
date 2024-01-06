@@ -44,7 +44,8 @@ function updateMarker(markers) {
 function numVisited(markers) {
   let numVisited = {
     "restaurants": 0,
-    "cafes": 0
+    "cafes": 0,
+    "regions": 0
   };
 
   markers.forEach((marker) => {

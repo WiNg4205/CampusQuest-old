@@ -1,4 +1,4 @@
-function addPopUp(marker) {console.log(marker);
+function addPopUp(marker) {
   const markerObject = marker.marker
   const name = marker.name;
   const description = marker.description
