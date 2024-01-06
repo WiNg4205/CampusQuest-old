@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { setSidebarUpdateCallback } from "./MapUtil";
+import ProgressBar from "./ProgressBar";
 // import Tabs from "./Tabs";
 
 function SideBar() {
@@ -18,40 +19,51 @@ function SideBar() {
     });
   }, []);
 
+  const questStyle = {
+    display: 'flex',
+    flexflow:"column nowrap",
+    justifyContent: 'space-around',
+    alignItems: 'space-around',
+    height: '18vh',
+    width: '22vw',
+    background: 'url(quest_type_1.svg) center/cover no-repeat'
+  }
+
   return (
     <div className="flex flex-col h-screen">
       <div className="text-4xl font-pixel font-bold text-center p-4 w-full">Campus Quest</div>
 
-      <div className="flex-1 overflow-y-auto">
+      <div className="flex-1 flex-col h-100vh overflow-y-auto">
         {activeTab === "quests" && (
           <div className="flex-1 overflow-y-auto">
-            <div className="p-4 transition duration-300 hover:bg-blue-200 w-full">
+            <div className="p-6 transition duration-300 hover:bg-blue-200 w-full" style={questStyle}>
               <div className="text-xl font-pixel">Restaurant Explorer</div>
-              <div className="italic">Visit 3 restaurants</div>
+              <div className="italic font-pixel">Visit 3 restaurants</div>
+              <ProgressBar />
               <div className="relative h-10 bg-green-300">
               <div className="absolute h-full bg-green-500" style={{ width: `${Math.min((visitedCount / 3) * 100, 100)}%` }}></div>
               </div>
             </div>
 
-            <div className="p-4 transition duration-300 hover:bg-blue-200">
+            <div className="p-4 transition duration-300 hover:bg-blue-200" style={questStyle}>
               <div className="text-xl font-pixel">Region Explorer</div>
-              <div className="italic">Visit 2 regions</div>
+              <div className="italic font-pixel">Visit 2 regions</div>
               <div className="relative h-10 bg-green-300">
                 <div className="absolute h-full bg-green-500" style={{ width: "0%" }}></div>
               </div>
             </div>
 
-            <div className="p-4 transition duration-300 hover:bg-blue-200">
+            <div className="p-4 transition duration-300 hover:bg-blue-200" style={questStyle}>
               <div className="text-xl font-pixel">Caffeine Addict</div>
-              <div className="italic">Visit all cafés</div>
+              <div className="italic font-pixel">Visit all cafés</div>
               <div className="relative h-10 bg-green-300">
                 <div className="absolute h-full bg-green-500" style={{ width: "0%" }}></div>
               </div>
             </div>
 
-            <div className="p-4 transition duration-300 hover:bg-blue-200 w-full">
+            <div className="p-4 transition duration-300 hover:bg-blue-200 w-full" style={questStyle}>
               <div className="text-xl font-pixel">Restaurant Explorer II</div>
-              <div className="italic">Visit 5 restaurants</div>
+              <div className="italic font-pixel">Visit 5 restaurants</div>
               <div className="relative h-10 bg-green-300">
               <div className="absolute h-full bg-green-500" style={{ width: `${Math.min((visitedCount / 5) * 100, 100)}%` }}></div>
               </div>
@@ -125,7 +137,7 @@ function SideBar() {
 
       <div className="flex p-4">
         <div
-          className={`flex-1 text-center font-bold text-xl cursor-pointer ${
+          className={`flex-1 text-center font-pixel font-bold text-xl cursor-pointer ${
             activeTab === "quests" ? "text-blue-500" : ""
           }`}
           onClick={() => handleTabClick("quests")}
@@ -133,7 +145,7 @@ function SideBar() {
           Quests
         </div>
         <div
-          className={`flex-1 text-center font-bold text-xl cursor-pointer ${
+          className={`flex-1 text-center font-pixel font-bold text-xl cursor-pointer ${
             activeTab === "rewards" ? "text-blue-500" : ""
           }`}
           onClick={() => handleTabClick("rewards")}
