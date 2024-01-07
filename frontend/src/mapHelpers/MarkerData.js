@@ -30,7 +30,7 @@ var markerData = [
     }
   },
   {
-    lngLat: {lng: 151.232624, lat: -33.916964},
+    lngLat: {lng: 151.232665, lat: -33.916847},
     name: 'Boost Juice',
     description: 'Nice way to refresh!',    
     imgUrl: '',
@@ -63,7 +63,7 @@ var markerData = [
     name: 'Nene Chicken',
     description: 'description',
     imgUrl: '',
-    lngLat: {lng: 151.230880, lat: -33.916728},
+    lngLat: {lng: 151.230602, lat: -33.917212},
     options: {
       imgUrl: 'nene-chicken-logo.png',
       imgScale: 3,
