@@ -1,3 +1,6 @@
+import * as turf from '@turf/turf'
+import Polygon from "./Polygons";
+
 // Function to calculate haversine distance between two sets of coordinates
 function haversineDistance(lat1, lon1, lat2, lon2) {
     const R = 6371; // Earth radius in kilometers
@@ -41,12 +44,37 @@ function updateMarker(markers) {
   });
 }
 
-function numVisited(markers) {
+function checkBlueDotIntersection(regions) {
+  const coordinatesObject = window.blueDot.lngLat;
+  const blueDotCoordinates = [coordinatesObject.lng, coordinatesObject.lat];
+
+  const intersectingPolygon = Polygon.find(polygon => {
+    const pt = turf.point(blueDotCoordinates);
+    const isInside = turf.booleanPointInPolygon(pt, polygon);
+    return isInside;
+  });
+
+  if (intersectingPolygon) {
+    const name = intersectingPolygon.properties.name;
+    
+    regions[name] = true;
+  }
+}
+
+
+function numVisited(markers, regions) {
   let numVisited = {
     "restaurants": 0,
     "cafes": 0,
     "regions": 0
   };
+
+  checkBlueDotIntersection(regions);
+  const values = Object.values(regions);
+
+  values.forEach(value => {console.log(12)
+    if (value) numVisited["regions"]++;
+  });
 
   markers.forEach((marker) => {
     if (marker["visited"] === true) {

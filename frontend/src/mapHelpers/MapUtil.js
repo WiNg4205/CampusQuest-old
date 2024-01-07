@@ -1,4 +1,4 @@
-import { numVisited, updateMarker } from "./markers/Markers";
+import { updateMarker, numVisited } from "./Tracker";
 
 let sidebarUpdateCallback = null; // Callback function to update the sidebar
 
@@ -23,7 +23,7 @@ function resetMarker(marker) {
   marker.setSize(originalSize);
 }
 
-function handleKeyDown(event, markers) {
+function handleKeyDown(event, markers, regions) {
   const step = 0.0001;
   const currentLngLat = window.blueDot.lngLat;
 
@@ -31,22 +31,22 @@ function handleKeyDown(event, markers) {
     case 'w':
       window.blueDot.setLngLat({ lat: currentLngLat.lat + step, lng: currentLngLat.lng });
       updateMarker(markers);
-      notifySidebarUpdate(numVisited(markers));
+      notifySidebarUpdate(numVisited(markers, regions));
       break;
     case 's':
       window.blueDot.setLngLat({ lat: currentLngLat.lat - step, lng: currentLngLat.lng });
       updateMarker(markers);
-      notifySidebarUpdate(numVisited(markers));
+      notifySidebarUpdate(numVisited(markers, regions));
       break;
     case 'a':
       window.blueDot.setLngLat({ lat: currentLngLat.lat, lng: currentLngLat.lng - step });
       updateMarker(markers);
-      notifySidebarUpdate(numVisited(markers));
+      notifySidebarUpdate(numVisited(markers, regions));
       break;
     case 'd':
       window.blueDot.setLngLat({ lat: currentLngLat.lat, lng: currentLngLat.lng + step });
       updateMarker(markers);
-      notifySidebarUpdate(numVisited(markers));
+      notifySidebarUpdate(numVisited(markers, regions));
       break;
     default:
       return;
