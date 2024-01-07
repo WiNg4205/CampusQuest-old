@@ -1,11 +1,13 @@
 import React, { useEffect, useRef } from 'react';
-import markerData from './markers/MarkerData';
-import { addPopUp } from './markers/PopUp';
-import { inflateMarker, resetMarker, handleKeyDown } from './MapUtil';
-import { setModeUpdateCallback } from './sidebar/LocationButton';
+import markerData from './mapHelpers/MarkerData';
+import { addPopUp } from './mapHelpers/PopUp';
+import { inflateMarker, resetMarker, handleKeyDown } from './mapHelpers/MapUtil';
+import { setModeUpdateCallback } from './sidebarHelpers/LocationButton';
+import Polygon from './mapHelpers/Polygons';
 
 
 var markers = []; // Declare markers globally
+var regions = {};
 
 // function postLocationData(locationData) {
 //   console.log("interval");
@@ -25,16 +27,67 @@ var markers = []; // Declare markers globally
 //       }
 //   );
 // }
+function initializeBlueDot(window, map, locationData) {
+  window.blueDot = new window.Mazemap.BlueDot({
+    map: map,
+  })
+  .setZLevel(1)
+  .setAccuracy(10)
+  .setLngLatAnimated(locationData)
+  .show();
+}
 
-function intializeBlueDot(window, map, locationData) {
-  map.on('load', function() {
-    window.blueDot = new window.Mazemap.BlueDot({
-      map: map,
-    })
-    .setZLevel(1)
-    .setAccuracy(10)
-    .setLngLatAnimated(locationData)
-    .show();
+function initializePolygons(map) {
+  map.addLayer({
+    id: 'custom-polygon-layer',
+    type: "fill",
+    source: {
+      type: 'geojson',
+      data: null,
+    },
+    paint: {
+      "fill-color": "rgba(255, 255, 0, 0.2)",
+      "fill-outline-color": "red"
+    }
+  });
+
+  map.getSource("custom-polygon-layer").setData({type: "FeatureCollection", features: Polygon});
+}
+
+function initializeMarkers(map) {
+  markerData.forEach(markerDetails => {
+    const lngLat = markerDetails.lngLat;
+    const options = markerDetails.options;
+    const markerObject = new window.Mazemap.MazeMarker(options).setLngLat(lngLat).addTo(map);
+
+    const marker = {
+      "marker" : markerObject,
+      "name" : markerDetails.name,
+      "description" : markerDetails.description,
+      "imgUrl" : markerDetails.imgUrl,
+      "visited" : false
+    }
+
+    markers.push(marker);
+    addPopUp(marker);
+  });
+
+  markers.forEach((marker) => { // icons inflate on mouse hover
+    let markerObject = marker["marker"];
+    markerObject.getElement().addEventListener('mouseenter', () => {
+      inflateMarker(markerObject);
+    });
+
+    markerObject.getElement().addEventListener('mouseleave', () => {
+      resetMarker(markerObject);
+    });
+  });
+}
+
+function initializeRegions() {
+  Polygon.forEach(polygon => {
+    const name = polygon.properties["name"]
+    regions[name] = false;
   });
 }
 
@@ -59,26 +112,6 @@ function updateLocation(navigator, window) {
   )
 }
 
-function addMarkers(map) {
-  let i, lngLat, options, marker, markerObject;
-
-  for (i = 0; i < markerData.length; i++) {
-    lngLat = markerData[i].lngLat;
-    options = markerData[i].options;
-    markerObject = new window.Mazemap.MazeMarker(options).setLngLat(lngLat).addTo(map);
-
-    marker = {
-      "marker" : markerObject,
-      "name" : markerData[i].name,
-      "description" : markerData[i].description,
-      "imgUrl" : markerData[i].imgUrl,
-      "visited" : false
-    }
-
-    markers.push(marker);
-    addPopUp(marker);
-  }
-}
 
 function Map() {
   const intervalRef = useRef(null);
@@ -124,21 +157,11 @@ function Map() {
       zLevel: zLevel
     });
 
-    addMarkers(map);
-    intializeBlueDot(window, map, lngLat);
-
-    
     map.on('load', function() {
-      markers.forEach((marker) => { // icons inflate on mouse hover
-        let markerObject = marker["marker"];
-        markerObject.getElement().addEventListener('mouseenter', () => {
-          inflateMarker(markerObject);
-        });
-    
-        markerObject.getElement().addEventListener('mouseleave', () => {
-          resetMarker(markerObject);
-        });
-      });
+      initializeRegions();
+      initializeMarkers(map);
+      initializePolygons(map);
+      initializeBlueDot(window, map, lngLat);
     });
     
     return () => {
@@ -150,7 +173,7 @@ function Map() {
   return <div id="map" className="mazemap"></div>;
 };
 
-document.addEventListener('keydown', (event) => handleKeyDown(event, markers));
+document.addEventListener('keydown', (event) => handleKeyDown(event, markers, regions));
 
 
 export default Map;

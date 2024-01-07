@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import LocationButton from "./sidebar/LocationButton";
-import { setSidebarUpdateCallback } from "./MapUtil";
-import { totalPoints } from "./sidebar/Points"
-import QuestList from "./sidebar/QuestList";
+import LocationButton from "./sidebarHelpers/LocationButton";
+import { setSidebarUpdateCallback } from "./mapHelpers/MapUtil";
+import { totalPoints } from "./sidebarHelpers/Points"
+import QuestList from "./sidebarHelpers/QuestList";
 // import Tabs from "./Tabs";
 
 function SideBar() {
