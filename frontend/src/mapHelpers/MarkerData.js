@@ -107,7 +107,7 @@ var markerData = [
   {
     name: 'Sharetea',
     description: 'Sharetea is the only bubble tea store in unsw (I think)',    
-    imgUrl: 'sharetea-icon.svg',
+    imgUrl: 'sharetea-new-icon.svg',
     lngLat: {lng: 151.227803, lat: -33.915670},
     options: {
       name: 'Sharetea',
