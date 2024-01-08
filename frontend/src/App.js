@@ -7,7 +7,7 @@ import Modal from './Modal';
 function App() {
   return (
     <div className="flex">
-      <Modal/>
+      <Modal />
       <div className="w-1/4 bg-gray-200 px-4">
         <SideBar />
       </div>
