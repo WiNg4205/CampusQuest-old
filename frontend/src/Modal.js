@@ -19,6 +19,10 @@ function Modal() {
                 Earn points by adventuring around campus.<br />
                 Collect as many points as possible to get rewards!
               </p>
+              <p className="text-base leading-relaxed text-gray-500">
+                Use the WASD keys to move your location.<br />
+                Turn on location mode by clicking on the blue button.
+              </p>
             </div>
             
             <div className="mt-6">
